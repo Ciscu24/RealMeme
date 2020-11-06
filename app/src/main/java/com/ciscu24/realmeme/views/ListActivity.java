@@ -1,19 +1,27 @@
-package com.ciscu24.realmeme;
+package com.ciscu24.realmeme.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.ciscu24.realmeme.R;
+import com.ciscu24.realmeme.interfaces.ListInterface;
+import com.ciscu24.realmeme.presenters.ListPresenter;
+import com.ciscu24.realmeme.views.FormActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity implements ListInterface.View {
+
+    String TAG = "Demo2021/ListActivity";
+    private ListInterface.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +30,14 @@ public class ListActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        System.out.println("hola");
+        presenter = new ListPresenter(this);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Log.d(TAG, "Click on Floating Button");
+                presenter.onClickAddMeme();
             }
         });
     }
@@ -54,5 +62,11 @@ public class ListActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void startFormActivity() {
+        Intent intent = new Intent(getApplicationContext(), FormActivity.class);
+        startActivity(intent);
     }
 }

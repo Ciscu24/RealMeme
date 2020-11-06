@@ -1,9 +1,11 @@
-package com.ciscu24.realmeme;
+package com.ciscu24.realmeme.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.ciscu24.realmeme.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

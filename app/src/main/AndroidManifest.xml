@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_realmeme_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RealMeme">
-        <activity android:name=".LogoActivity" android:screenOrientation="portrait">
+        <activity
+            android:name=".views.FormActivity"
+            android:label="@string/title_activity_form"
+            android:theme="@style/Theme.RealMeme.NoActionBar"></activity>
+        <activity
+            android:name=".views.LogoActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,10 +23,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ListActivity"
+            android:name=".views.ListActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.RealMeme.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.RealMeme.NoActionBar"></activity>
     </application>
 
 </manifest>
