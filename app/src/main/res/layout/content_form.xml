@@ -12,10 +12,13 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
+            android:id="@+id/GeneralLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -23,6 +26,7 @@
             android:padding="30dp">
 
             <LinearLayout
+                android:id="@+id/NameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="30dp"
@@ -31,13 +35,14 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/NameImage"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_weight="0"
-                    app:srcCompat="@android:drawable/ic_dialog_email" />
+                    app:srcCompat="@drawable/icon_name" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/NameText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
@@ -53,6 +58,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/DescriptionLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="30dp"
@@ -61,13 +67,14 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/DescriptionImage"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_weight="0"
-                    app:srcCompat="@android:drawable/ic_dialog_email" />
+                    app:srcCompat="@drawable/icon_description" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/DescriptionText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
@@ -83,6 +90,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/AuthorLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="30dp"
@@ -91,13 +99,14 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView11"
+                    android:id="@+id/AuthorImage"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_weight="0"
-                    app:srcCompat="@android:drawable/ic_dialog_email" />
+                    app:srcCompat="@drawable/icon_author" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/AuthorText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
@@ -113,6 +122,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/LikeDateLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="30dp"
@@ -121,13 +131,14 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imagenView05"
+                    android:id="@+id/LikeImage"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_weight="0"
-                    app:srcCompat="@android:drawable/btn_star_big_off" />
+                    app:srcCompat="@drawable/icon_like" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/LikeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -142,13 +153,14 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageView
-                    android:id="@+id/imagenView06"
+                    android:id="@+id/DateImage"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_weight="0"
-                    app:srcCompat="@android:drawable/btn_star_big_off" />
+                    app:srcCompat="@drawable/icon_calendar" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/DateText"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -165,6 +177,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/FavCategoryLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="30dp"
@@ -173,56 +186,101 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imagenView"
+                    android:id="@+id/FavImage"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_weight="0"
-                    app:srcCompat="@android:drawable/btn_star_big_off" />
+                    app:srcCompat="@drawable/icon_fav" />
 
                 <Switch
-                    android:id="@+id/switch1"
+                    android:id="@+id/FavSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="0"
-                    android:theme="@style/ToggleSwitchTheme"/>
+                    android:theme="@style/ToggleSwitchTheme" />
 
                 <ImageView
-                    android:id="@+id/imagenView04"
+                    android:id="@+id/CategoryImage"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_weight="0"
-                    app:srcCompat="@android:drawable/btn_star_big_off" />
+                    app:srcCompat="@drawable/icon_category" />
 
-                <com.google.android.material.textfield.TextInputLayout
+                <Spinner
+                    android:id="@+id/CategorySpinner"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
+
+                <Button
+                    android:id="@+id/CategoryAddButton"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:background="@android:color/transparent"
+                    android:text="+"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ImageLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/CleanImageButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    app:boxBackgroundColor="@android:color/transparent">
+                    android:text="Limpiar Imagen"
+                    android:textColor="@color/white" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:hint="Categoria" />
-                </com.google.android.material.textfield.TextInputLayout>
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0"
+                    android:background="@drawable/icon_image" />
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+            <LinearLayout
+                android:id="@+id/ButtonLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:layout_weight="0"
-                app:srcCompat="@drawable/meme_logo" />
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/azul_oscuro"
-                android:text="Validar" />
+                <Button
+                    android:id="@+id/CleanFormButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="0"
+                    android:backgroundTint="@color/design_default_color_error"
+                    android:text="Eliminar"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/SaveButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="0"
+                    android:backgroundTint="@color/azul_oscuro"
+                    android:text="Guardar"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
