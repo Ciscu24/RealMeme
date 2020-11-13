@@ -40,8 +40,9 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         });
 
         Spinner spinner = (Spinner) findViewById(R.id.CategorySpinner);
-        String[] letra = {"A","B","C","D","E"};
-        spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, letra));
+        String[] letra = {"Seleccione categoria","Anime","Animales","Peliculas","Comics"};
+
+        spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, letra));
 
         Button SaveButton = findViewById(R.id.SaveButton);
 
@@ -55,8 +56,6 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
 
     @Override
     public void SaveMeme() {
-        Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-        startActivity(intent);
         finish();
     }
 }
