@@ -42,13 +42,15 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
         });
     }
 
+    //Funcion para añadir el menu que queramos
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_list, menu);
         return true;
     }
 
+    //Funcion para asignar funciones a los botones del menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -57,8 +59,16 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings_list) {
             return true;
+        }
+
+        if(id == R.id.action_search_list){
+            presenter.onClickSearchToolbar();
+        }
+
+        if(id == R.id.action_about_list){
+            presenter.onClickAboutToolbar();
         }
 
         return super.onOptionsItemSelected(item);
@@ -69,4 +79,18 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
         Intent intent = new Intent(getApplicationContext(), FormActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void startAboutActivity() {
+        Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void startSearchActivity() {
+        Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+        startActivity(intent);
+    }
+
+
 }

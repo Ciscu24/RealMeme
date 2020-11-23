@@ -15,4 +15,18 @@ public class FormPresenter implements FormInterface.Presenter {
         //Log.d("");
         view.SaveMeme();
     }
+
+    @Override
+    public String getError(String error) {
+        String result = "";
+
+        switch (error){
+            case "name":
+                result = "Introduce un nombre de más de 5 caracteres";
+                break;
+        }
+
+        return result;
+    }
+
 }

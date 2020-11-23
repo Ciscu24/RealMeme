@@ -15,4 +15,14 @@ public class ListPresenter implements ListInterface.Presenter {
         //Log.d("");
         view.startFormActivity();
     }
+
+    @Override
+    public void onClickAboutToolbar() {
+        view.startAboutActivity();
+    }
+
+    @Override
+    public void onClickSearchToolbar() {
+        view.startSearchActivity();
+    }
 }

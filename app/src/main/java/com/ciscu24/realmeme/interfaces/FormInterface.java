@@ -8,6 +8,7 @@ public interface FormInterface {
 
     public interface Presenter{
         void onClickSaveButton();
+        String getError(String error);
     }
 
 }

@@ -1,12 +1,13 @@
 package com.ciscu24.realmeme.views;
 
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.ciscu24.realmeme.R;
 import com.ciscu24.realmeme.interfaces.FormInterface;
-import com.ciscu24.realmeme.interfaces.ListInterface;
+import com.ciscu24.realmeme.models.MemeEntity;
 import com.ciscu24.realmeme.presenters.FormPresenter;
+import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,11 +15,15 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 public class FormActivity extends AppCompatActivity implements FormInterface.View {
 
     private FormInterface.Presenter presenter;
+    EditText nameText;
+    TextInputLayout nameInputLayout;
+    MemeEntity meme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,26 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             @Override
             public void onClick(View view) {
                 presenter.onClickSaveButton();
+            }
+        });
+
+        nameText = findViewById(R.id.NameTextForm);
+        nameInputLayout = findViewById(R.id.NameInputForm);
+        meme = new MemeEntity();
+
+        nameText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (!hasFocus) {
+                    //Log.d("FormActivity", "Exit EditText");
+                    if (!meme.setName(nameText.getText().toString())) {
+                        nameText.setError(presenter.getError("name"));
+                    } else {
+                        nameText.setError("");
+                    }
+                }else{
+                    //Log.d("FormActivity", "Input EditText");
+                }
             }
         });
     }

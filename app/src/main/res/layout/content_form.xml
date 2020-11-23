@@ -42,17 +42,18 @@
                     app:srcCompat="@drawable/icon_name" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/NameText"
+                    android:id="@+id/NameInputForm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     app:boxBackgroundColor="@android:color/transparent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/NameTextForm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
-                        android:hint="Nombre del meme..." />
+                        android:hint="@string/form_name" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -84,7 +85,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
-                        android:hint="Descripción del meme..." />
+                        android:hint="@string/form_description" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -116,7 +117,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
-                        android:hint="Autor..." />
+                        android:hint="@string/form_author" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -149,7 +150,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
-                        android:hint="Nota..." />
+                        android:hint="@string/form_like" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageView
@@ -171,7 +172,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
-                        android:hint="Fecha" />
+                        android:hint="@string/form_date" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -228,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:text="Limpiar Imagen"
+                    android:text="@string/form_button_clean_image"
                     android:textColor="@color/white" />
 
                 <ImageView
@@ -251,13 +252,13 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/CleanFormButton"
+                    android:id="@+id/DeleteFormButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:layout_weight="0"
                     android:backgroundTint="@color/design_default_color_error"
-                    android:text="Eliminar"
+                    android:text="@string/form_button_delete"
                     android:textColor="@color/white" />
 
                 <Button
@@ -267,7 +268,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_weight="0"
                     android:backgroundTint="@color/azul_oscuro"
-                    android:text="Guardar"
+                    android:text="@string/form_button_save"
                     android:textColor="@color/white" />
 
             </LinearLayout>
