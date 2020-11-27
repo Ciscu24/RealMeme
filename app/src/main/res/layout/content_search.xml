@@ -41,13 +41,14 @@
                     app:srcCompat="@drawable/icon_name" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/NameTextSearch"
+                    android:id="@+id/NameInputSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     app:boxBackgroundColor="@android:color/transparent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/NameTextSearch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -73,14 +74,16 @@
                     app:srcCompat="@drawable/icon_calendar" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/DateTextSearch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:id="@+id/DateInputSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    android:enabled="false"
                     app:boxBackgroundColor="@android:color/transparent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/DateTextSearch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -108,7 +111,7 @@
                 <Spinner
                     android:id="@+id/CategorySpinnerSearch"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="0" />
 
             </LinearLayout>

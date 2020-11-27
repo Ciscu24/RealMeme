@@ -75,13 +75,14 @@
                     app:srcCompat="@drawable/icon_description" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/DescriptionText"
+                    android:id="@+id/DescriptionInputForm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     app:boxBackgroundColor="@android:color/transparent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/DescriptionTextForm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -107,13 +108,14 @@
                     app:srcCompat="@drawable/icon_author" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/AuthorText"
+                    android:id="@+id/AuthorInputForm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     app:boxBackgroundColor="@android:color/transparent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/AuthorTextForm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -139,7 +141,7 @@
                     app:srcCompat="@drawable/icon_like" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/LikeText"
+                    android:id="@+id/LikeInputForm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -147,7 +149,8 @@
                     app:boxBackgroundColor="@android:color/transparent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
+                        android:id="@+id/LikeTextForm"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         android:hint="@string/form_like" />
@@ -161,7 +164,7 @@
                     app:srcCompat="@drawable/icon_calendar" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/DateText"
+                    android:id="@+id/DateInputForm"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -169,7 +172,8 @@
                     app:boxBackgroundColor="@android:color/transparent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
+                        android:id="@+id/DateTextForm"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         android:hint="@string/form_date" />
@@ -262,7 +266,7 @@
                     android:textColor="@color/white" />
 
                 <Button
-                    android:id="@+id/SaveButton"
+                    android:id="@+id/SaveFormButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"

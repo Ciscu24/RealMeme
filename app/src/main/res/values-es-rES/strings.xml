@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RealMeme</string>
+    <string name="app_version">Versión 1.0</string>
+    <string name="title_activity_form">Formulario</string>
+    <string name="title_activity_about">Acerca de</string>
+    <string name="title_activity_search">Buscar</string>
+    <string name="form_name">Nombre del meme...</string>
+    <string name="form_description">Descripción del meme...</string>
+    <string name="form_author">Autor...</string>
+    <string name="form_like">Nota...</string>
+    <string name="form_date">Fecha</string>
+    <string name="form_button_clean_image">Limpiar Imagen</string>
+    <string name="form_button_delete">Eliminar</string>
+    <string name="form_button_save">Guardar</string>
+    <string name="search_button_search">Buscar</string>
+    <string name="action_settings">Configuración</string>
+    <string name="action_search">Buscar</string>
+    <string name="action_order">Ordenar</string>
+    <string name="action_help">Ayuda</string>
+    <string name="action_about">Acerca de</string>
+    <string name="error_name">Introduce un nombre de más de 5 caractéres y que no contenga numeros</string>
+    <string name="error_description">La descripción tiene que tener más de 10 caractéres y menos de 50</string>
+    <string name="error_author">El nombre del autor tiene que tener mas de 5 caractéres</string>
+    <string name="error_like">La nota tiene que ser entre 0 y 10</string>
+    <string name="error_date">La fecha tiene que ser obligatoriamente DD/MM/YYYY o DD/MM/YYY</string>
+    <string name="add">Añadir</string>
+    <string name="cancel">Cancelar</string>
+    <string name="add_new_option">Añadir nueva categoría</string>
+    <string name="your_option">Escribe tu categoría</string>
+    <string name="toast_nothing">Usted no ha introducido nada</string>
+    <string name="delete_meme_dialog_tittle">Eliminar Meme</string>
+    <string name="delete_meme_dialog_message">Esta seguro de que desea eliminar el meme, esto no se puede deshacer</string>
+    <string name="spinner_info">Selecciona una categoría...</string>
+    <string name="spinner_add">Añade una categoría...</string>
+    <string name="spinner_data_02">Animales</string>
+    <string name="spinner_data_03">Películas</string>
+    <string name="find_object">Se han encontrado 3 objetos</string>
+</resources>

@@ -58,11 +58,6 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings_list) {
-            return true;
-        }
-
         if(id == R.id.action_search_list){
             presenter.onClickSearchToolbar();
         }

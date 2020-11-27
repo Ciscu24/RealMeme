@@ -1,6 +1,8 @@
 package com.ciscu24.realmeme.presenters;
 
+import com.ciscu24.realmeme.R;
 import com.ciscu24.realmeme.interfaces.FormInterface;
+import com.ciscu24.realmeme.views.MyApplication;
 
 public class FormPresenter implements FormInterface.Presenter {
 
@@ -22,11 +24,28 @@ public class FormPresenter implements FormInterface.Presenter {
 
         switch (error){
             case "name":
-                result = "Introduce un nombre de más de 5 caracteres";
+                result = MyApplication.getContext().getResources().getString(R.string.error_name);
+                break;
+            case "description":
+                result = MyApplication.getContext().getResources().getString(R.string.error_description);
+                break;
+            case "author":
+                result = MyApplication.getContext().getResources().getString(R.string.error_author);
+                break;
+            case "like":
+                result = MyApplication.getContext().getResources().getString(R.string.error_like);
+                break;
+            case "date":
+                result = MyApplication.getContext().getResources().getString(R.string.error_date);
                 break;
         }
 
         return result;
+    }
+
+    @Override
+    public void onClickAcceptDeleteButton() {
+        view.DeleteMeme();
     }
 
 }
