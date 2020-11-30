@@ -305,7 +305,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         builder.setMessage(R.string.delete_meme_dialog_message);
 
         //Accept Button
-        builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.form_button_delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 presenter.onClickAcceptDeleteButton();

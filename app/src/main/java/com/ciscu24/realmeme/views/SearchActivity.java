@@ -65,7 +65,6 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
         spinner = (Spinner) findViewById(R.id.CategorySpinnerSearch);
         ArrayList<String> items = new ArrayList<>();
         items.add(getString(R.string.spinner_info));
-        items.add(getString(R.string.spinner_add));
         items.add(getString(R.string.spinner_data_01));
         items.add(getString(R.string.spinner_data_02));
         items.add(getString(R.string.spinner_data_03));
@@ -73,18 +72,6 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
 
         adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, items);
         spinner.setAdapter(adapter);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                if(position==1){
-                    addCategory();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) { }
-        });
 
         dateText = findViewById(R.id.DateTextSearch);
         dateImageView = findViewById(R.id.DateImageSearch);
@@ -130,45 +117,6 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
     @Override
     public void SearchMeme() {
         finish();
-    }
-
-    public void addCategory(){
-        LayoutInflater layoutActivity = LayoutInflater.from(myContext);
-        View viewAlertDialog = layoutActivity.inflate(R.layout.alert_dialog, null);
-
-        // Definición del AlertDialog
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(myContext);
-
-        // Asignación del AlertDialog a su vista
-        alertDialog.setView(viewAlertDialog);
-
-        // Recuperación del EditText del AlertDialog
-        final EditText dialogInput = (EditText) viewAlertDialog.findViewById(R.id.dialogInput);
-
-        //Configuracion del AlertDialog
-        alertDialog.setCancelable(false).setPositiveButton(getResources().getString(R.string.add),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if(!dialogInput.getText().toString().equals("")){
-                            adapter.add(dialogInput.getText().toString());
-                            spinner.setSelection(adapter.getPosition(dialogInput.getText().toString()));
-                        }else{
-                            Toast.makeText(myContext, R.string.toast_nothing, Toast.LENGTH_LONG).show();
-                            spinner.setSelection(adapter.getPosition(getString(R.string.spinner_info)));
-                        }
-                    }
-                })
-                .setNegativeButton(getResources().getString(R.string.cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                spinner.setSelection(adapter.getPosition(getString(R.string.spinner_info)));
-                                dialogInterface.cancel();
-                            }
-                        })
-                .create()
-                .show();
     }
 
     public void datePicker(){
