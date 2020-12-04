@@ -25,4 +25,18 @@ public class ListPresenter implements ListInterface.Presenter {
     public void onClickSearchToolbar() {
         view.startSearchActivity();
     }
+
+    @Override
+    public void onClickRecyclerViewItem(String id) {
+        view.startFormActivity(id);
+    }
+
+    public void onSwipeRecyclerViewItem(String id) {
+        //Decirle al modelo que borre id
+        //... luego en la Unidad 5
+        //Decirle al RecyclerView que lo elimino
+        //view.removeRecyclerViewItem(id);
+        //Decirle al view que muestre el Toast
+        //view.showToast("error");
+    }
 }

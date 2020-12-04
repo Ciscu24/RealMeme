@@ -38,27 +38,28 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
     private Context myContext;
     private Spinner spinner;
     private ArrayAdapter<String> adapter;
+    private String id;
 
-    MemeEntity meme;
+    private MemeEntity meme;
 
-    EditText nameText;
-    TextInputLayout nameInputLayout;
+    private EditText nameText;
+    private TextInputLayout nameInputLayout;
 
-    EditText descriptionText;
-    TextInputLayout descriptionInputLayout;
+    private EditText descriptionText;
+    private TextInputLayout descriptionInputLayout;
 
-    EditText authorText;
-    TextInputLayout authorInputLayout;
+    private  EditText authorText;
+    private  TextInputLayout authorInputLayout;
 
-    EditText likeText;
-    TextInputLayout likeInputLayout;
+    private  EditText likeText;
+    private  TextInputLayout likeInputLayout;
 
-    EditText dateText;
-    TextInputLayout dateInputLayout;
-    ImageView dateImageView;
-    Calendar calendar;
-    DatePickerDialog datePickerDialog;
-    int Year, Month, Day;
+    private EditText dateText;
+    private TextInputLayout dateInputLayout;
+    private ImageView dateImageView;
+    private Calendar calendar;
+    private DatePickerDialog datePickerDialog;
+    private int Year, Month, Day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -226,6 +227,16 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                 datePicker();
             }
         });
+
+        id = getIntent().getStringExtra("id");
+
+        if(id != null){
+            //Recuperar la info de esa entidad
+            nameText.setText(id);
+        }else{
+            // Deshabilitar el boton eliminar
+        }
+
     }
 
     @Override

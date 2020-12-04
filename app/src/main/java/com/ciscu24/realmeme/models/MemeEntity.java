@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MemeEntity {
+    private String id;
     private String name;
     private String description;
     private String author;
@@ -12,6 +13,7 @@ public class MemeEntity {
     private Date date;
     private boolean fav;
     private String category;
+    private String image;
 
 
     public MemeEntity() {}
@@ -24,6 +26,14 @@ public class MemeEntity {
         this.date = date;
         this.fav = fav;
         this.category = category;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -122,5 +132,13 @@ public class MemeEntity {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
