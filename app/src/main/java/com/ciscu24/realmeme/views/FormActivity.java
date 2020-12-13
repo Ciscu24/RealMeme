@@ -1,20 +1,33 @@
 package com.ciscu24.realmeme.views;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.ciscu24.realmeme.R;
 import com.ciscu24.realmeme.interfaces.FormInterface;
 import com.ciscu24.realmeme.models.MemeEntity;
 import com.ciscu24.realmeme.presenters.FormPresenter;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,9 +39,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -39,6 +53,10 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
     private Spinner spinner;
     private ArrayAdapter<String> adapter;
     private String id;
+    final private int CODE_WRITE_EXTERNAL_STORAGE_PERMISSION = 123;
+    private static final int REQUEST_SELECT_IMAGE = 201;
+    private ConstraintLayout constraintLayoutFromActivity;
+    private Uri uri;
 
     private MemeEntity meme;
 
@@ -61,6 +79,9 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
     private DatePickerDialog datePickerDialog;
     private int Year, Month, Day;
 
+    private Button cleanImageButton;
+    private ImageView imageMeme;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +89,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
 
         presenter = new FormPresenter(this);
         myContext = this;
+        constraintLayoutFromActivity = findViewById(R.id.constraintLayoutForm);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -237,6 +259,24 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             // Deshabilitar el boton eliminar
         }
 
+        imageMeme = findViewById(R.id.imageMemeForm);
+
+        imageMeme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onClickImageView();
+            }
+        });
+
+        cleanImageButton = findViewById(R.id.CleanImageButton);
+
+        cleanImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onClickCleanImage();
+            }
+        });
+
     }
 
     @Override
@@ -269,6 +309,43 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
     @Override
     public void DeleteMeme() {
         finish();
+    }
+
+    @Override
+    public void permisions() {
+        int WriteExternalStoragePermission = ContextCompat.checkSelfPermission(myContext, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        Log.d("MainActivity", "WRITE_EXTERNAL_STORAGE Permission: " + WriteExternalStoragePermission);
+        if(WriteExternalStoragePermission != PackageManager.PERMISSION_GRANTED){
+            // Permiso denegado
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                ActivityCompat.requestPermissions(FormActivity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, CODE_WRITE_EXTERNAL_STORAGE_PERMISSION);
+                // Una vez que se pide aceptar o rechazar el permiso se ejecuta el método "onRequestPermissionsResult" para manejar la respuesta
+                // Si el usuario marca "No preguntar más" no se volverá a mostrar este diálogo
+            }else{
+                Snackbar.make(constraintLayoutFromActivity, getResources().getString(R.string.write_permission_denied), Snackbar.LENGTH_LONG).show();
+            }
+        }else{
+            // Permiso aceptado
+            //Snackbar.make(constraintLayoutFromActivity, getResources().getString(R.string.write_permission_granted), Snackbar.LENGTH_LONG).show();
+            presenter.onClickSelectImage();
+        }
+    }
+
+    @Override
+    public void selectPicture(){
+        // Se le pide al sistema una imagen del dispositivo
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(
+                Intent.createChooser(intent, getResources().getString(R.string.choose_picture)),
+                REQUEST_SELECT_IMAGE);
+    }
+
+    @Override
+    public void cleanImage() {
+        imageMeme.setImageBitmap(null);
+        imageMeme.setBackground(getDrawable(R.drawable.default_image));
     }
 
     public void addCategory(){
@@ -353,4 +430,39 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         // Mostrar el calendario
         datePickerDialog.show();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case (REQUEST_SELECT_IMAGE):
+                if (resultCode == Activity.RESULT_OK) {
+                    // Se carga la imagen desde un objeto Bitmap
+                    Uri selectedImage = data.getData();
+                    String selectedPath = selectedImage.getPath();
+
+                    if (selectedPath != null) {
+                        // Se leen los bytes de la imagen
+                        InputStream imageStream = null;
+                        try {
+                            imageStream = getContentResolver().openInputStream(selectedImage);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                        // Se transformam los bytes de la imagen a un Bitmap
+                        Bitmap bmp = BitmapFactory.decodeStream(imageStream);
+                        Bitmap imageScaled = Bitmap.createScaledBitmap(bmp, 200, 200, false);
+
+                        // Quitamos del ImagenView el background
+                        imageMeme.setBackground(null);
+
+                        // Se carga el Bitmap en el ImageView
+                        imageMeme.setImageBitmap(bmp);
+                    }
+                }
+                break;
+        }
+    }
+
 }

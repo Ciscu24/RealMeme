@@ -48,7 +48,7 @@ public class MemeAdapter
 
             }
             textView_name.setText(item.getName());
-            //textView_like.setText(item.getLike());
+            textView_like.setText(item.getLike()+"");
         }
     }
 

@@ -36,4 +36,7 @@
     <string name="spinner_data_02">Animales</string>
     <string name="spinner_data_03">Películas</string>
     <string name="find_object">Se han encontrado 3 objetos</string>
+    <string name="write_permission_granted">Tienes permiso de Escritura</string>
+    <string name="write_permission_denied">No tienes permiso de Escritura</string>
+    <string name="choose_picture">Elige una imagen</string>
 </resources>

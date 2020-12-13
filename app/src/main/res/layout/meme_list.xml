@@ -7,10 +7,12 @@
 
     <TextView
         android:id="@+id/textView_name"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
+        android:gravity="center"
         android:text="TextView"
+        android:textAlignment="center"
         android:textColor="@color/negro_letras"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,15 +25,16 @@
         android:id="@+id/textView_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="10dp"
         android:text="TextView"
         android:textColor="@color/negro_letras"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toEndOf="@+id/imageView_meme"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/full_names" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_name"
+        tools:text="@tools:sample/us_zipcodes" />
 
     <ImageView
         android:id="@+id/imageView_meme"
@@ -41,4 +44,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView_like"
+        app:layout_constraintTop_toBottomOf="@+id/textView_name"
+        app:layout_constraintVertical_bias="0.556"
+        app:srcCompat="@drawable/icon_like" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

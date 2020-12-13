@@ -48,4 +48,19 @@ public class FormPresenter implements FormInterface.Presenter {
         view.DeleteMeme();
     }
 
+    @Override
+    public void onClickImageView() {
+        view.permisions();
+    }
+
+    @Override
+    public void onClickSelectImage() {
+        view.selectPicture();
+    }
+
+    @Override
+    public void onClickCleanImage() {
+        view.cleanImage();
+    }
+
 }
