@@ -1,12 +1,24 @@
 package com.ciscu24.realmeme.presenters;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.util.Log;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.ciscu24.realmeme.R;
 import com.ciscu24.realmeme.interfaces.FormInterface;
+import com.ciscu24.realmeme.views.FormActivity;
 import com.ciscu24.realmeme.views.MyApplication;
+import com.google.android.material.snackbar.Snackbar;
 
 public class FormPresenter implements FormInterface.Presenter {
 
     private FormInterface.View view;
+    final private int CODE_WRITE_EXTERNAL_STORAGE_PERMISSION = 123;
 
     public FormPresenter(FormInterface.View view) {
         this.view = view;
@@ -50,17 +62,29 @@ public class FormPresenter implements FormInterface.Presenter {
 
     @Override
     public void onClickImageView() {
-        view.permisions();
-    }
-
-    @Override
-    public void onClickSelectImage() {
-        view.selectPicture();
+        int WriteExternalStoragePermission = ContextCompat.checkSelfPermission(MyApplication.getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        Log.d("FormPresenter", "WRITE_EXTERNAL_STORAGE Permission: " + WriteExternalStoragePermission);
+        if(WriteExternalStoragePermission != PackageManager.PERMISSION_GRANTED){
+            view.showRequestPermission();
+        }else{
+            // Permiso aceptado
+            view.selectImageFromGallery();
+        }
     }
 
     @Override
     public void onClickCleanImage() {
         view.cleanImage();
+    }
+
+    @Override
+    public void permissionGranted() {
+        view.selectImageFromGallery();
+    }
+
+    @Override
+    public void permissionDenied() {
+        view.showErrorPermissionDenied();
     }
 
 }

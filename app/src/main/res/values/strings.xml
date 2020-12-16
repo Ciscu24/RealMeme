@@ -63,6 +63,11 @@
     <string name="spinner_data_03">Films</string>
     <string name="spinner_data_04" translatable="false">Comics</string>
 
+    <!-- Toast -->
+    <string name="memeTwoDotsToast">Meme:</string>
+    <string name="deleteSuccessToast">, remove successful</string>
+    <string name="deleteDangerToast">Error removing the item</string>
+
 
 
     <!-- Permisos -->
@@ -72,6 +77,5 @@
 
     <string name="choose_picture">Choose an image</string>
     <string name="find_object">3 objects found</string>
-
 
 </resources>

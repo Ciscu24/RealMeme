@@ -1,5 +1,7 @@
 package com.ciscu24.realmeme.presenters;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.ciscu24.realmeme.interfaces.ListInterface;
 
 public class ListPresenter implements ListInterface.Presenter {
@@ -29,6 +31,11 @@ public class ListPresenter implements ListInterface.Presenter {
     @Override
     public void onClickRecyclerViewItem(String id) {
         view.startFormActivity(id);
+    }
+
+    @Override
+    public void onSwipeMeme(RecyclerView.ViewHolder target) {
+        view.onSwipedRemove(target);
     }
 
     public void onSwipeRecyclerViewItem(String id) {

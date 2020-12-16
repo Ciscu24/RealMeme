@@ -39,4 +39,7 @@
     <string name="write_permission_granted">Tienes permiso de Escritura</string>
     <string name="write_permission_denied">No tienes permiso de Escritura</string>
     <string name="choose_picture">Elige una imagen</string>
+    <string name="memeTwoDotsToast">Meme: </string>
+    <string name="deleteSuccessToast">, borrado con exito</string>
+    <string name="deleteDangerToast">El meme no se ha borrado</string>
 </resources>

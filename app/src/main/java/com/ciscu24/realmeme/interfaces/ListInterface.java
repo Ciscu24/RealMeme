@@ -1,5 +1,7 @@
 package com.ciscu24.realmeme.interfaces;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 public interface ListInterface {
 
     public interface View{
@@ -7,6 +9,7 @@ public interface ListInterface {
         void startFormActivity(String id);
         void startAboutActivity();
         void startSearchActivity();
+        void onSwipedRemove(RecyclerView.ViewHolder target);
     }
 
     public interface Presenter{
@@ -14,5 +17,6 @@ public interface ListInterface {
         void onClickAboutToolbar();
         void onClickSearchToolbar();
         void onClickRecyclerViewItem(String id);
+        void onSwipeMeme(RecyclerView.ViewHolder target);
     }
 }

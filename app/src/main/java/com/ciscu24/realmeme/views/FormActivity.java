@@ -20,6 +20,7 @@ import com.ciscu24.realmeme.presenters.FormPresenter;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -312,27 +313,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
     }
 
     @Override
-    public void permisions() {
-        int WriteExternalStoragePermission = ContextCompat.checkSelfPermission(myContext, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        Log.d("MainActivity", "WRITE_EXTERNAL_STORAGE Permission: " + WriteExternalStoragePermission);
-        if(WriteExternalStoragePermission != PackageManager.PERMISSION_GRANTED){
-            // Permiso denegado
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                ActivityCompat.requestPermissions(FormActivity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, CODE_WRITE_EXTERNAL_STORAGE_PERMISSION);
-                // Una vez que se pide aceptar o rechazar el permiso se ejecuta el método "onRequestPermissionsResult" para manejar la respuesta
-                // Si el usuario marca "No preguntar más" no se volverá a mostrar este diálogo
-            }else{
-                Snackbar.make(constraintLayoutFromActivity, getResources().getString(R.string.write_permission_denied), Snackbar.LENGTH_LONG).show();
-            }
-        }else{
-            // Permiso aceptado
-            //Snackbar.make(constraintLayoutFromActivity, getResources().getString(R.string.write_permission_granted), Snackbar.LENGTH_LONG).show();
-            presenter.onClickSelectImage();
-        }
-    }
-
-    @Override
-    public void selectPicture(){
+    public void selectImageFromGallery() {
         // Se le pide al sistema una imagen del dispositivo
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -346,6 +327,23 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
     public void cleanImage() {
         imageMeme.setImageBitmap(null);
         imageMeme.setBackground(getDrawable(R.drawable.default_image));
+    }
+
+    @Override
+    public void showErrorPermissionDenied() {
+        Snackbar.make(constraintLayoutFromActivity, getResources().getString(R.string.write_permission_denied), Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showRequestPermission() {
+        // Permiso denegado
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            ActivityCompat.requestPermissions(FormActivity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, CODE_WRITE_EXTERNAL_STORAGE_PERMISSION);
+            // Una vez que se pide aceptar o rechazar el permiso se ejecuta el método "onRequestPermissionsResult" para manejar la respuesta
+            // Si el usuario marca "No preguntar más" no se volverá a mostrar este diálogo
+        }else{
+            Snackbar.make(constraintLayoutFromActivity, getResources().getString(R.string.write_permission_denied), Snackbar.LENGTH_LONG).show();
+        }
     }
 
     public void addCategory(){
@@ -465,4 +463,16 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            //Toast.makeText(this, "Permission Granted!", Toast.LENGTH_SHORT).show();
+            presenter.permissionGranted();
+        } else {
+            //Toast.makeText(this, "Permission Denied!", Toast.LENGTH_SHORT).show();
+            presenter.permissionDenied();
+        }
+    }
 }

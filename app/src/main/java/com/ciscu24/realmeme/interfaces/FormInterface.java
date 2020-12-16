@@ -5,9 +5,10 @@ public interface FormInterface {
     public interface View{
         void SaveMeme();
         void DeleteMeme();
-        void permisions();
-        void selectPicture();
+        void selectImageFromGallery();
         void cleanImage();
+        void showErrorPermissionDenied();
+        void showRequestPermission();
     }
 
     public interface Presenter{
@@ -15,8 +16,9 @@ public interface FormInterface {
         String getError(String error);
         void onClickAcceptDeleteButton();
         void onClickImageView();
-        void onClickSelectImage();
         void onClickCleanImage();
+        void permissionGranted();
+        void permissionDenied();
     }
 
 }

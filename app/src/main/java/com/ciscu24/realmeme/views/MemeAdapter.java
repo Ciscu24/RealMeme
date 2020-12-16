@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ciscu24.realmeme.R;
@@ -45,7 +46,7 @@ public class MemeAdapter
                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                 imageView_Meme.setImageBitmap(decodedByte);
             }else{
-
+                imageView_Meme.setImageDrawable(MyApplication.getContext().getDrawable(R.drawable.default_image));
             }
             textView_name.setText(item.getName());
             textView_like.setText(item.getLike()+"");
