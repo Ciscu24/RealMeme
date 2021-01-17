@@ -63,19 +63,21 @@
     <string name="spinner_data_03">Films</string>
     <string name="spinner_data_04" translatable="false">Comics</string>
 
+
     <!-- Toast -->
     <string name="memeTwoDotsToast">Meme:</string>
     <string name="deleteSuccessToast">, remove successful</string>
     <string name="deleteDangerToast">Error removing the item</string>
+    <string name="filedsMissing">Please fill all fields</string>
+    <string name="memeNotSave">Meme has not been saved successfully</string>
 
 
-
-    <!-- Permisos -->
+    <!-- Permission -->
     <string name="write_permission_granted">You have writing permission</string>
     <string name="write_permission_denied">You do not have writing permission</string>
 
 
     <string name="choose_picture">Choose an image</string>
-    <string name="find_object">3 objects found</string>
+    <string name="find_object">objects found</string>
 
 </resources>

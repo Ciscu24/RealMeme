@@ -11,6 +11,8 @@ import androidx.core.content.ContextCompat;
 
 import com.ciscu24.realmeme.R;
 import com.ciscu24.realmeme.interfaces.FormInterface;
+import com.ciscu24.realmeme.models.MemeEntity;
+import com.ciscu24.realmeme.models.MemeModel;
 import com.ciscu24.realmeme.views.FormActivity;
 import com.ciscu24.realmeme.views.MyApplication;
 import com.google.android.material.snackbar.Snackbar;
@@ -19,15 +21,21 @@ public class FormPresenter implements FormInterface.Presenter {
 
     private FormInterface.View view;
     final private int CODE_WRITE_EXTERNAL_STORAGE_PERMISSION = 123;
+    private MemeModel memeModel;
 
     public FormPresenter(FormInterface.View view) {
         this.view = view;
+        memeModel = new MemeModel();
     }
 
     @Override
-    public void onClickSaveButton() {
-        //Log.d("");
-        view.SaveMeme();
+    public void onClickSaveButton(MemeEntity meme) {
+        if(memeModel.insertMeme(meme)){
+            view.SaveMeme();
+        }else{
+            //mostrar un error en el formulario
+            view.showErrorWithToast(MyApplication.getContext().getResources().getString(R.string.memeNotSave));
+        }
     }
 
     @Override

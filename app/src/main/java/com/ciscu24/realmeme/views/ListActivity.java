@@ -7,7 +7,6 @@ import com.ciscu24.realmeme.R;
 import com.ciscu24.realmeme.interfaces.ListInterface;
 import com.ciscu24.realmeme.models.MemeEntity;
 import com.ciscu24.realmeme.presenters.ListPresenter;
-import com.ciscu24.realmeme.views.FormActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
@@ -22,6 +21,7 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,6 +32,7 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     private ListInterface.Presenter presenter;
     private ArrayList<MemeEntity> items;
     MemeAdapter adapter;
+    private TextView textObjectFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +52,14 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
             }
         });
 
+        textObjectFound = findViewById(R.id.textObjectsFound);
+
+        //items = new ArrayList<MemeEntity>();
+
         //Creo una lista con los elementos a mostrar
         //ESTO ES PROVISIONAL HASTA QUE HAGAMOS EL MODELO EN LA UNIDAD 5
+        /*
         items = new ArrayList<MemeEntity>();
-
         MemeEntity meme1 = new MemeEntity();
         meme1.setId("1");
         meme1.setLike("8");
@@ -125,6 +130,14 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
         meme10.setId("10");
         items.add(meme10);
 
+        */
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        items = presenter.getAllItemsSummarize();
 
         // Inicializa el RecyclerView
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.memelist);
@@ -166,6 +179,8 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
         });
 
         helper.attachToRecyclerView(recyclerView);
+
+        textObjectFound.setText(items.size() +" "+ getString(R.string.find_object));
     }
 
     //Funcion para añadir el menu que queramos

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -40,8 +42,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -80,6 +84,8 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
     private DatePickerDialog datePickerDialog;
     private int Year, Month, Day;
 
+    private Switch favSwitch;
+
     private Button cleanImageButton;
     private ImageView imageMeme;
 
@@ -103,6 +109,8 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                 onBackPressed();
             }
         });
+
+        favSwitch = findViewById(R.id.FavSwitch);
 
         spinner = (Spinner) findViewById(R.id.CategorySpinner);
         ArrayList<String> items = new ArrayList<>();
@@ -139,7 +147,32 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         SaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.onClickSaveButton();
+                if(meme.setName(nameText.getText().toString()) &&
+                        meme.setDescription(descriptionText.getText().toString()) &&
+                        meme.setAuthor(authorText.getText().toString()) &&
+                        meme.setLike(likeText.getText().toString()) &&
+                        meme.setDate(dateText.getText().toString()) &&
+                        spinner.getSelectedItemPosition()!=0){
+
+                    meme.setFav(favSwitch.isChecked());
+                    meme.setCategory(spinner.getSelectedItem().toString());
+
+                    if(imageMeme.getDrawable() == null || ((BitmapDrawable)imageMeme.getDrawable()).getBitmap() == null){
+                        meme.setImage("");
+                    }else{
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        ((BitmapDrawable)imageMeme.getDrawable()).getBitmap().compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                        byte[] byteArray = byteArrayOutputStream.toByteArray();
+                        String imageInBase64 = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                        meme.setImage(imageInBase64);
+                    }
+
+                    presenter.onClickSaveButton(meme);
+                    System.out.println("true");
+                }else{
+                    showErrorWithToast(getString(R.string.filedsMissing));
+                    System.out.println("false");
+                }
             }
         });
 
@@ -344,6 +377,11 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         }else{
             Snackbar.make(constraintLayoutFromActivity, getResources().getString(R.string.write_permission_denied), Snackbar.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void showErrorWithToast(String text) {
+        Toast.makeText(myContext, text, Toast.LENGTH_LONG).show();
     }
 
     public void addCategory(){

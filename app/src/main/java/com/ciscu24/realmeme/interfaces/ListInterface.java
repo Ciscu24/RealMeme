@@ -2,6 +2,10 @@ package com.ciscu24.realmeme.interfaces;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ciscu24.realmeme.models.MemeEntity;
+
+import java.util.ArrayList;
+
 public interface ListInterface {
 
     public interface View{
@@ -18,5 +22,6 @@ public interface ListInterface {
         void onClickSearchToolbar();
         void onClickRecyclerViewItem(String id);
         void onSwipeMeme(RecyclerView.ViewHolder target);
+        ArrayList<MemeEntity> getAllItemsSummarize();
     }
 }

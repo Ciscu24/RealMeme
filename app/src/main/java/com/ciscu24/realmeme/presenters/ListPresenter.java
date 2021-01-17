@@ -3,19 +3,29 @@ package com.ciscu24.realmeme.presenters;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ciscu24.realmeme.interfaces.ListInterface;
+import com.ciscu24.realmeme.models.MemeEntity;
+import com.ciscu24.realmeme.models.MemeModel;
+
+import java.util.ArrayList;
 
 public class ListPresenter implements ListInterface.Presenter {
 
     private ListInterface.View view;
+    private MemeModel model;
 
     public ListPresenter(ListInterface.View view) {
         this.view = view;
+        this.model = new MemeModel();
     }
 
     @Override
     public void onClickAddMeme() {
         //Log.d("");
         view.startFormActivity();
+    }
+
+    public ArrayList<MemeEntity> getAllItemsSummarize(){
+        return model.getAllSummarize();
     }
 
     @Override

@@ -4,7 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MemeEntity {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class MemeEntity extends RealmObject {
+    @PrimaryKey
     private String id;
     private String name;
     private String description;
