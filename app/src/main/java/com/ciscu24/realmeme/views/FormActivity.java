@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -48,6 +49,7 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -89,6 +91,8 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
     private Button cleanImageButton;
     private ImageView imageMeme;
 
+    private Button deleteMemeButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +113,8 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                 onBackPressed();
             }
         });
+
+        deleteMemeButton = findViewById(R.id.DeleteFormButton);
 
         favSwitch = findViewById(R.id.FavSwitch);
 
@@ -284,15 +290,6 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             }
         });
 
-        id = getIntent().getStringExtra("id");
-
-        if(id != null){
-            //Recuperar la info de esa entidad
-            nameText.setText(id);
-        }else{
-            // Deshabilitar el boton eliminar
-        }
-
         imageMeme = findViewById(R.id.imageMemeForm);
 
         imageMeme.setOnClickListener(new View.OnClickListener() {
@@ -310,6 +307,39 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                 presenter.onClickCleanImage();
             }
         });
+
+        id = getIntent().getStringExtra("id");
+
+        if(id != null){
+            deleteMemeButton.setBackgroundColor(getResources().getColor(R.color.background_delete_button));
+
+            //Recuperar la info de esa entidad
+            MemeEntity memeLoad = presenter.getMemeById(id);
+            nameText.setText(memeLoad.getName());
+            descriptionText.setText(memeLoad.getDescription());
+            authorText.setText(memeLoad.getAuthor());
+            likeText.setText(memeLoad.getLike()+"");
+            favSwitch.setChecked(memeLoad.isFav());
+
+            SimpleDateFormat newDate = new SimpleDateFormat("dd/MM/yyyy");
+            dateText.setText(newDate.format(memeLoad.getDate())+"");
+
+
+            if(!memeLoad.getImage().equals("")){
+                imageMeme.setBackground(null);
+                byte[] decodedString = Base64.decode(memeLoad.getImage(), Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                imageMeme.setImageBitmap(decodedByte);
+            }else{
+                imageMeme.setImageDrawable(MyApplication.getContext().getDrawable(R.drawable.default_image));
+            }
+
+
+        }else{
+            // Deshabilitar el boton eliminar
+            deleteMemeButton.setEnabled(false);
+            deleteMemeButton.setBackgroundColor(getResources().getColor(R.color.background_delete_button_disabled));
+        }
 
     }
 

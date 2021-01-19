@@ -22,6 +22,7 @@ public interface FormInterface {
         void onClickCleanImage();
         void permissionGranted();
         void permissionDenied();
+        MemeEntity getMemeById(String id);
     }
 
 }

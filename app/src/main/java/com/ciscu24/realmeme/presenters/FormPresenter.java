@@ -95,4 +95,11 @@ public class FormPresenter implements FormInterface.Presenter {
         view.showErrorPermissionDenied();
     }
 
+    @Override
+    public MemeEntity getMemeById(String id) {
+        MemeEntity result = new MemeEntity();
+        result = memeModel.getMemeById(id);
+        return result;
+    }
+
 }

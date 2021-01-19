@@ -53,4 +53,15 @@ public class MemeModel {
 
         return memeListSummarize;
     }
+
+    public MemeEntity getMemeById(String id){
+        MemeEntity result = null;
+        Realm realm = Realm.getDefaultInstance();
+
+        result = realm.where(MemeEntity.class)
+                .equalTo("id", id)
+                .findFirst();
+
+        return result;
+    }
 }

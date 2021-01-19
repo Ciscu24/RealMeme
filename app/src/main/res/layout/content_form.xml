@@ -235,7 +235,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:text="@string/form_button_clean_image"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/black" />
 
                 <ImageView
                     android:id="@+id/imageMemeForm"
@@ -262,7 +262,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:layout_weight="0"
-                    android:backgroundTint="@color/design_default_color_error"
                     android:text="@string/form_button_delete"
                     android:textColor="@color/white" />
 

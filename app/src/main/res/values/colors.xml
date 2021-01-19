@@ -3,7 +3,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="azul_oscuro">#FF2C6187</color>
-    <color name="azul_claro">#FF29ABBA</color>
+    <!--<color name="azul_claro">#FF29ABBA</color>-->
+    <color name="azul_claro">#b0d8ff</color>
     <color name="negro_letras">#FF2E2E2E</color>
     <color name="gris_clarito">#FFE6E6E6</color>
+    <color name="background_delete_button">#ff2424</color>
+    <color name="background_delete_button_disabled">#ff6666</color>
 </resources>
