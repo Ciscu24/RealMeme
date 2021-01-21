@@ -2,11 +2,15 @@ package com.ciscu24.realmeme.models;
 
 import android.util.Log;
 
+import com.ciscu24.realmeme.R;
+import com.ciscu24.realmeme.views.MyApplication;
+
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class MemeModel {
@@ -26,6 +30,14 @@ public class MemeModel {
         realm.close();
 
         return result.get();
+    }
+
+    public void updateMeme(MemeEntity meme){
+        Realm realm = Realm.getDefaultInstance();
+
+        realm.executeTransaction(r -> {
+            realm.copyToRealmOrUpdate(meme);
+        });
     }
 
     public ArrayList<MemeEntity> getAllSummarize(){
@@ -63,5 +75,27 @@ public class MemeModel {
                 .findFirst();
 
         return result;
+    }
+
+    public ArrayList<String> getAllCategories(){
+        ArrayList<String> categories = new ArrayList<>();
+
+        categories.add(MyApplication.getContext().getString(R.string.spinner_info));
+        categories.add(MyApplication.getContext().getString(R.string.spinner_add));
+
+        Realm realm = Realm.getDefaultInstance();
+
+        RealmResults<MemeEntity> result = realm.where(MemeEntity.class).distinct("category").findAll();
+
+        ArrayList<MemeEntity> memeList = new ArrayList<>();
+
+        memeList.addAll(realm.copyFromRealm(result));
+
+        for(MemeEntity meme: memeList){
+            categories.add(meme.getCategory());
+        }
+
+        return categories;
+
     }
 }

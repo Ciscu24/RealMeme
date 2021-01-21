@@ -44,6 +44,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -119,13 +120,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         favSwitch = findViewById(R.id.FavSwitch);
 
         spinner = (Spinner) findViewById(R.id.CategorySpinner);
-        ArrayList<String> items = new ArrayList<>();
-        items.add(getString(R.string.spinner_info));
-        items.add(getString(R.string.spinner_add));
-        items.add(getString(R.string.spinner_data_01));
-        items.add(getString(R.string.spinner_data_02));
-        items.add(getString(R.string.spinner_data_03));
-        items.add(getString(R.string.spinner_data_04));
+        ArrayList<String> items = presenter.getCategoriesRealm();
 
         adapter = new ArrayAdapter<String>(myContext, R.layout.support_simple_spinner_dropdown_item, items);
         spinner.setAdapter(adapter);
@@ -153,6 +148,30 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         SaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (!meme.setName(nameText.getText().toString())) {
+                    nameInputLayout.setError(presenter.getError("name"));
+                }
+                if (!meme.setDescription(descriptionText.getText().toString())) {
+                    descriptionInputLayout.setError(presenter.getError("description"));
+                }
+                if (!meme.setAuthor(authorText.getText().toString())) {
+                    authorInputLayout.setError(presenter.getError("author"));
+                }
+                if (likeText.getText().toString().equals("") || !meme.setLike(likeText.getText().toString())) {
+                    likeInputLayout.setError(presenter.getError("like"));
+                }
+                if (!meme.setDate(dateText.getText().toString())) {
+                    dateInputLayout.setError(presenter.getError("date"));
+                }
+                if (spinner.getSelectedItemPosition() == 0){
+                    TextView errorText = (TextView)spinner.getSelectedView();
+                    errorText.setError("");
+                    errorText.setTextColor(Color.RED);
+                    errorText.setText("");
+                }
+
+
                 if(meme.setName(nameText.getText().toString()) &&
                         meme.setDescription(descriptionText.getText().toString()) &&
                         meme.setAuthor(authorText.getText().toString()) &&
@@ -173,7 +192,14 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                         meme.setImage(imageInBase64);
                     }
 
-                    presenter.onClickSaveButton(meme);
+                    if(id!=null){
+                        meme.setId(id);
+                        presenter.onClickSaveButton(meme);
+                    }else{
+                        meme.setId("");
+                        presenter.onClickSaveButton(meme);
+                    }
+
                     System.out.println("true");
                 }else{
                     showErrorWithToast(getString(R.string.filedsMissing));
@@ -334,6 +360,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
                 imageMeme.setImageDrawable(MyApplication.getContext().getDrawable(R.drawable.default_image));
             }
 
+            spinner.setSelection(getIndex(spinner, memeLoad.getCategory()));
 
         }else{
             // Deshabilitar el boton eliminar
@@ -495,6 +522,18 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         },Year, Month, Day);
         // Mostrar el calendario
         datePickerDialog.show();
+    }
+
+    private int getIndex(Spinner spinner, String myString){
+
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(myString)){
+                index = i;
+            }
+        }
+        return index;
     }
 
     @Override

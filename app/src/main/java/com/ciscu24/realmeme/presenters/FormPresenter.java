@@ -17,6 +17,8 @@ import com.ciscu24.realmeme.views.FormActivity;
 import com.ciscu24.realmeme.views.MyApplication;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+
 public class FormPresenter implements FormInterface.Presenter {
 
     private FormInterface.View view;
@@ -30,7 +32,10 @@ public class FormPresenter implements FormInterface.Presenter {
 
     @Override
     public void onClickSaveButton(MemeEntity meme) {
-        if(memeModel.insertMeme(meme)){
+        if(meme.getId()!=""){
+            memeModel.updateMeme(meme);
+            view.SaveMeme();
+        }else if(memeModel.insertMeme(meme)){
             view.SaveMeme();
         }else{
             //mostrar un error en el formulario
@@ -100,6 +105,11 @@ public class FormPresenter implements FormInterface.Presenter {
         MemeEntity result = new MemeEntity();
         result = memeModel.getMemeById(id);
         return result;
+    }
+
+    @Override
+    public ArrayList<String> getCategoriesRealm() {
+        return memeModel.getAllCategories();
     }
 
 }

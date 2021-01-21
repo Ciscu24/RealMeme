@@ -2,6 +2,8 @@ package com.ciscu24.realmeme.interfaces;
 
 import com.ciscu24.realmeme.models.MemeEntity;
 
+import java.util.ArrayList;
+
 public interface FormInterface {
 
     public interface View{
@@ -23,6 +25,7 @@ public interface FormInterface {
         void permissionGranted();
         void permissionDenied();
         MemeEntity getMemeById(String id);
+        ArrayList<String> getCategoriesRealm();
     }
 
 }
