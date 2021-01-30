@@ -42,6 +42,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -208,9 +209,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
             }
         });
 
-        Button DeleteButton = findViewById(R.id.DeleteFormButton);
-
-        DeleteButton.setOnClickListener(new View.OnClickListener() {
+        deleteMemeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 deleteDialog();
@@ -365,7 +364,10 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         }else{
             // Deshabilitar el boton eliminar
             deleteMemeButton.setEnabled(false);
-            deleteMemeButton.setBackgroundColor(getResources().getColor(R.color.background_delete_button_disabled));
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) SaveButton.getLayoutParams();
+            params.leftMargin = 0;
+            SaveButton.setLayoutParams(params);
+            deleteMemeButton.setVisibility(View.GONE);
         }
 
     }
@@ -399,6 +401,8 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
 
     @Override
     public void DeleteMeme() {
+        Toast.makeText(FormActivity.this, getString(R.string.deleteMeme), Toast.LENGTH_LONG)
+                .show();
         finish();
     }
 
@@ -489,7 +493,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         builder.setPositiveButton(R.string.form_button_delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                presenter.onClickAcceptDeleteButton();
+                presenter.onClickAcceptDeleteButton(id);
             }
         });
 

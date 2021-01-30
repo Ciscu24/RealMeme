@@ -6,6 +6,7 @@ import com.ciscu24.realmeme.R;
 import com.ciscu24.realmeme.views.MyApplication;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -97,5 +98,61 @@ public class MemeModel {
 
         return categories;
 
+    }
+
+    public boolean deleteMeme(String id){
+        boolean result = false;
+        Realm realm = Realm.getDefaultInstance();
+
+        realm.executeTransaction(r -> {
+            MemeEntity memeRealm = realm.where(MemeEntity.class)
+                    .equalTo("id", id)
+                    .findFirst();
+
+            memeRealm.deleteFromRealm();
+        });
+
+        result = true;
+
+        realm.close();
+
+        return result;
+    }
+
+    public ArrayList<MemeEntity> getWithFilter(String name, Date date, String category){
+        Realm realm = Realm.getDefaultInstance();
+
+        RealmResults<MemeEntity> result;
+
+        if(date==null){
+            result = realm.where(MemeEntity.class).contains("name", name)
+                    .contains("category", category)
+                    .findAll();
+        }else{
+            result = realm.where(MemeEntity.class).contains("name", name)
+                    .equalTo("date", date)
+                    .contains("category", category)
+                    .findAll();
+        }
+
+        Log.d("Realm find items: ", "" + result.size());
+
+        ArrayList<MemeEntity> memeList = new ArrayList<>();
+        memeList.addAll(realm.copyFromRealm(result));
+
+        realm.close();
+
+        ArrayList<MemeEntity> memeListSummarize = new ArrayList<>();
+
+        for(MemeEntity meme: memeList){
+            MemeEntity newMeme = new MemeEntity();
+            newMeme.setId(meme.getId());
+            newMeme.setName(meme.getName());
+            newMeme.setLike(meme.getLike()+"");
+            newMeme.setImage(meme.getImage());
+            memeListSummarize.add(newMeme);
+        }
+
+        return memeListSummarize;
     }
 }

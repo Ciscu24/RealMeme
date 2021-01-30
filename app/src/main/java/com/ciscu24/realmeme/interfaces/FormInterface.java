@@ -19,7 +19,7 @@ public interface FormInterface {
     public interface Presenter{
         void onClickSaveButton(MemeEntity meme);
         String getError(String error);
-        void onClickAcceptDeleteButton();
+        void onClickAcceptDeleteButton(String id);
         void onClickImageView();
         void onClickCleanImage();
         void permissionGranted();

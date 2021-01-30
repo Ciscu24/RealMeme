@@ -3,6 +3,7 @@ package com.ciscu24.realmeme.views;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.ciscu24.realmeme.interfaces.SearchInterface;
@@ -37,7 +38,9 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
     private Spinner spinner;
     private ArrayAdapter<String> adapter;
 
+    EditText nameText;
     EditText dateText;
+
     ImageView dateImageView;
     Calendar calendar;
     DatePickerDialog datePickerDialog;
@@ -63,15 +66,12 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
         });
 
         spinner = (Spinner) findViewById(R.id.CategorySpinnerSearch);
-        ArrayList<String> items = new ArrayList<>();
-        items.add(getString(R.string.spinner_info));
-        items.add(getString(R.string.spinner_data_01));
-        items.add(getString(R.string.spinner_data_02));
-        items.add(getString(R.string.spinner_data_03));
-        items.add(getString(R.string.spinner_data_04));
+        ArrayList<String> items = presenter.getCategoriesRealm();
 
         adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, items);
         spinner.setAdapter(adapter);
+
+        nameText = findViewById(R.id.NameTextSearch);
 
         dateText = findViewById(R.id.DateTextSearch);
         dateImageView = findViewById(R.id.DateImageSearch);
@@ -116,6 +116,11 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
 
     @Override
     public void SearchMeme() {
+        Intent i = getIntent();
+        i.putExtra("name", nameText.getText().toString());
+        i.putExtra("date", dateText.getText().toString());
+        i.putExtra("spinner", spinner.getSelectedItemId());
+        setResult(RESULT_OK, i);
         finish();
     }
 

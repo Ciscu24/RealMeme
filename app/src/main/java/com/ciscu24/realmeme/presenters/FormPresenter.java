@@ -69,7 +69,8 @@ public class FormPresenter implements FormInterface.Presenter {
     }
 
     @Override
-    public void onClickAcceptDeleteButton() {
+    public void onClickAcceptDeleteButton(String id) {
+        memeModel.deleteMeme(id);
         view.DeleteMeme();
     }
 

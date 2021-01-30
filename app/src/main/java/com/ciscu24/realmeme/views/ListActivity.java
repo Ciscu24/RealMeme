@@ -15,6 +15,7 @@ import com.ciscu24.realmeme.presenters.ListPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -29,7 +30,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ListActivity extends AppCompatActivity implements ListInterface.View {
 
@@ -39,6 +43,10 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     MemeAdapter adapter;
     private TextView textObjectFound;
     String prevStarted = "yes";
+
+    String nameFilter = null;
+    Date dateFilter = null;
+    String categoryFilter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +67,6 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
         });
 
         textObjectFound = findViewById(R.id.textObjectsFound);
-
-        //System.out.println("Esta es la primera vez: " + isFirstTime() + "------------------------------------------------------");
-
 
         if(isFirstTime()) {
             MemeModel memeModel = new MemeModel();
@@ -84,7 +89,6 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
             meme1.setCategory("Vida Cotidiana");
             memeModel.insertMeme(meme1);
             //items.add(meme1);
-            System.out.println("Meme1 metido");
 
             MemeEntity meme2 = new MemeEntity();
             meme2.setName("Tener bicicleta");
@@ -210,7 +214,14 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     protected void onResume() {
         super.onResume();
 
-        items = presenter.getAllItemsSummarize();
+        if(nameFilter==null && dateFilter==null && categoryFilter==null){
+            items = presenter.getAllItemsSummarize();
+        }else{
+            items = presenter.getItemsFilter(nameFilter, dateFilter, categoryFilter);
+            nameFilter = null;
+            dateFilter = null;
+            categoryFilter = null;
+        }
 
         // Inicializa el RecyclerView
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.memelist);
@@ -247,7 +258,7 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder target, int direction) {
-                presenter.onSwipeMeme(target);
+                presenter.onSwipeMeme(target, items.get(target.getAdapterPosition()).getId());
             }
         });
 
@@ -284,6 +295,33 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_CANCELED){
+            System.out.println("Back");
+        }else{
+            if(!data.getExtras().getString("name").equals("")){
+                nameFilter = data.getExtras().getString("name");
+            }else{
+
+            }
+
+            if(!data.getExtras().getString("date").equals("")){
+                SimpleDateFormat newDate = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    dateFilter = newDate.parse(data.getExtras().getString("date"));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(data.getExtras().getLong("spinner")!=0){
+                ArrayList<String> items = presenter.getCategoriesRealm();
+                categoryFilter = items.get((int)data.getExtras().getLong("spinner"));
+            }
+        }
+    }
+
+    @Override
     public void startFormActivity() {
         Intent intent = new Intent(getApplicationContext(), FormActivity.class);
         startActivity(intent);
@@ -305,7 +343,7 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     @Override
     public void startSearchActivity() {
         Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 0);
     }
 
     @Override
@@ -336,8 +374,6 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
         }
 
         return !ranBefore;
-
-
 
     }
 

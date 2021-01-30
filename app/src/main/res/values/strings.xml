@@ -70,6 +70,7 @@
     <string name="deleteDangerToast">Error removing the item</string>
     <string name="filedsMissing">Please fill all fields</string>
     <string name="memeNotSave">Meme has not been saved successfully</string>
+    <string name="deleteMeme">Meme deleted successfully</string>
 
 
     <!-- Permission -->

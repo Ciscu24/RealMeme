@@ -7,6 +7,7 @@ import com.ciscu24.realmeme.models.MemeEntity;
 import com.ciscu24.realmeme.models.MemeModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ListPresenter implements ListInterface.Presenter {
 
@@ -29,6 +30,11 @@ public class ListPresenter implements ListInterface.Presenter {
     }
 
     @Override
+    public ArrayList<MemeEntity> getItemsFilter(String name, Date date, String category) {
+        return model.getWithFilter(name, date, category);
+    }
+
+    @Override
     public void onClickAboutToolbar() {
         view.startAboutActivity();
     }
@@ -44,7 +50,8 @@ public class ListPresenter implements ListInterface.Presenter {
     }
 
     @Override
-    public void onSwipeMeme(RecyclerView.ViewHolder target) {
+    public void onSwipeMeme(RecyclerView.ViewHolder target, String id) {
+        model.deleteMeme(id);
         view.onSwipedRemove(target);
     }
 
@@ -55,5 +62,10 @@ public class ListPresenter implements ListInterface.Presenter {
         //view.removeRecyclerViewItem(id);
         //Decirle al view que muestre el Toast
         //view.showToast("error");
+    }
+
+    @Override
+    public ArrayList<String> getCategoriesRealm() {
+        return model.getAllCategories();
     }
 }

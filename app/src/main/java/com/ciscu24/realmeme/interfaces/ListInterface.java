@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ciscu24.realmeme.models.MemeEntity;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public interface ListInterface {
 
@@ -21,7 +22,9 @@ public interface ListInterface {
         void onClickAboutToolbar();
         void onClickSearchToolbar();
         void onClickRecyclerViewItem(String id);
-        void onSwipeMeme(RecyclerView.ViewHolder target);
+        void onSwipeMeme(RecyclerView.ViewHolder target, String id);
         ArrayList<MemeEntity> getAllItemsSummarize();
+        ArrayList<MemeEntity> getItemsFilter(String name, Date date, String category);
+        ArrayList<String> getCategoriesRealm();
     }
 }

@@ -44,4 +44,5 @@
     <string name="deleteDangerToast">El meme no se ha borrado</string>
     <string name="filedsMissing">Rellene todos los campos, por favor</string>
     <string name="memeNotSave">El meme no se ha guardado con éxito</string>
+    <string name="deleteMeme">Meme borrado con exito</string>
 </resources>

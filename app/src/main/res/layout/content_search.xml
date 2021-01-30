@@ -45,6 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:textColorHint="@color/negro_letras"
                     app:boxBackgroundColor="@android:color/transparent">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -52,7 +53,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
-                        android:hint="@string/form_name" />
+                        android:hint="@string/form_name"
+                        android:textColor="@color/negro_letras"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -80,6 +82,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:enabled="false"
+                    android:textColorHint="@color/negro_letras"
                     app:boxBackgroundColor="@android:color/transparent">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -87,7 +90,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
-                        android:hint="@string/form_date" />
+                        android:hint="@string/form_date"
+                        android:textColor="@color/negro_letras"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
