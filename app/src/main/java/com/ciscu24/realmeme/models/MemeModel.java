@@ -33,12 +33,16 @@ public class MemeModel {
         return result.get();
     }
 
-    public void updateMeme(MemeEntity meme){
+    public boolean updateMeme(MemeEntity meme){
+        AtomicBoolean result = new AtomicBoolean(false);
         Realm realm = Realm.getDefaultInstance();
 
         realm.executeTransaction(r -> {
             realm.copyToRealmOrUpdate(meme);
+            result.set(true);
         });
+
+        return result.get();
     }
 
     public ArrayList<MemeEntity> getAllSummarize(){
@@ -101,7 +105,7 @@ public class MemeModel {
     }
 
     public boolean deleteMeme(String id){
-        boolean result = false;
+        AtomicBoolean result = new AtomicBoolean(false);
         Realm realm = Realm.getDefaultInstance();
 
         realm.executeTransaction(r -> {
@@ -110,13 +114,12 @@ public class MemeModel {
                     .findFirst();
 
             memeRealm.deleteFromRealm();
+            result.set(true);
         });
-
-        result = true;
 
         realm.close();
 
-        return result;
+        return result.get();
     }
 
     public ArrayList<MemeEntity> getWithFilter(String name, Date date, String category){
