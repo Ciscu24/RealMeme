@@ -12,6 +12,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
@@ -19,6 +24,7 @@ public class ModelTest {
 
     private MemeModel memeModel;
     private MemeEntity memeEntity;
+    private String id;
 
     @Before
     public void setUp(){
@@ -30,9 +36,11 @@ public class ModelTest {
         memeEntity.setName("Conducir, imaginacion vs realidad");
         memeEntity.setDescription("Porque no hay que creerse guay conduciendo");
         memeEntity.setAuthor("Ciscu24");
-        memeEntity.setDate("19/01/2021");
+        memeEntity.setDate("20/10/2020");
         memeEntity.setFav(true);
         memeEntity.setCategory("Vida Cotidiana");
+        memeModel.insertMeme(memeEntity);
+        this.id = this.memeModel.getAllSummarize().get(0).getId();
     }
 
     /*@Test
@@ -51,5 +59,48 @@ public class ModelTest {
     public void updateMeme(){
         this.memeEntity.setFav(false);
         assertEquals(true, this.memeModel.updateMeme(this.memeEntity));
+    }
+
+    @Test
+    public void getAllMemes(){
+        assertEquals(this.id, this.memeModel.getAllSummarize().get(0).getId());
+    }
+
+    @Test
+    public void getMemeWithId(){
+        assertEquals(this.id, this.memeModel.getMemeById(this.id).getId());
+        assertEquals(this.memeEntity.getName(), this.memeModel.getMemeById(this.id).getName());
+    }
+
+    @Test
+    public void getAllCategories(){
+        ArrayList<String> categories = new ArrayList<>();
+        categories.add("Select category...");
+        categories.add("Add category...");
+        categories.add("Vida Cotidiana");
+        assertEquals(categories, this.memeModel.getAllCategories());
+    }
+
+    @Test
+    public void deleteMeme(){
+        assertEquals(true, this.memeModel.deleteMeme(this.id));
+    }
+
+    @Test
+    public void searchMeme(){
+        ArrayList<MemeEntity> memes = new ArrayList<>();
+        memes.add(this.memeEntity);
+        SimpleDateFormat newDate = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            assertEquals(memes.get(0).getName(), this.memeModel.getWithFilter("Conducir", newDate.parse("20/10/2020"), "Vida Cotidiana").get(0).getName());
+            assertEquals(memes.get(0).getName(), this.memeModel.getWithFilter("", newDate.parse("20/10/2020"), "").get(0).getName());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        assertEquals(memes.get(0).getName(), this.memeModel.getWithFilter("", null, "").get(0).getName());
+        assertEquals(memes.get(0).getName(), this.memeModel.getWithFilter("Conducir", null, "").get(0).getName());
+        assertEquals(memes.get(0).getName(), this.memeModel.getWithFilter("Conducir", null, "Vida Cotidiana").get(0).getName());
+        assertEquals(memes.get(0).getName(), this.memeModel.getWithFilter("Conducir", null, "Vida Cotidiana").get(0).getName());
+        assertEquals(0, this.memeModel.getWithFilter("Bicicleta", null, "").size());
     }
 }
