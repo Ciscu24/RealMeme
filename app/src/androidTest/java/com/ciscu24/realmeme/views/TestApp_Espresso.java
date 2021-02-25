@@ -50,7 +50,7 @@ public class TestApp_Espresso {
         try {
             Thread.sleep(3500);
         } catch (InterruptedException e) {
-            System.out.println("Hubo un error en la carga de OnCreate");
+            System.out.println("Error");
         }
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.fab),
@@ -65,7 +65,7 @@ public class TestApp_Espresso {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
-            System.out.println("Hubo un error en la carga de OnCreate");
+            System.out.println("Error");
         }
 
         ViewInteraction textInputEditText = onView(
