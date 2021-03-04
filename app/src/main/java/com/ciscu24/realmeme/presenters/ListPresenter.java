@@ -45,6 +45,11 @@ public class ListPresenter implements ListInterface.Presenter {
     }
 
     @Override
+    public void onClickHelpToolbar() {
+        view.startHelpListActivity();
+    }
+
+    @Override
     public void onClickRecyclerViewItem(String id) {
         view.startFormActivity(id);
     }

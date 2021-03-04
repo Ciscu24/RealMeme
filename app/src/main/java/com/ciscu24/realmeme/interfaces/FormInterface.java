@@ -13,6 +13,7 @@ public interface FormInterface {
         void cleanImage();
         void showErrorPermissionDenied();
         void showRequestPermission();
+        void startHelpFormActivity();
         void showErrorWithToast(String text);
     }
 
@@ -20,6 +21,7 @@ public interface FormInterface {
         void onClickSaveButton(MemeEntity meme);
         String getError(String error);
         void onClickAcceptDeleteButton(String id);
+        void onClickHelpToolbar();
         void onClickImageView();
         void onClickCleanImage();
         void permissionGranted();

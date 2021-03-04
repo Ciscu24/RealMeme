@@ -75,6 +75,11 @@ public class FormPresenter implements FormInterface.Presenter {
     }
 
     @Override
+    public void onClickHelpToolbar() {
+        view.startHelpFormActivity();
+    }
+
+    @Override
     public void onClickImageView() {
         int WriteExternalStoragePermission = ContextCompat.checkSelfPermission(MyApplication.getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
         Log.d("FormPresenter", "WRITE_EXTERNAL_STORAGE Permission: " + WriteExternalStoragePermission);

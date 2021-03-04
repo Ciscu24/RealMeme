@@ -25,4 +25,9 @@ public class SearchPresenter implements SearchInterface.Presenter {
         return memeModel.getAllCategories();
     }
 
+    @Override
+    public void onClickHelpToolbar() {
+        view.startHelpSearchActivity();
+    }
+
 }

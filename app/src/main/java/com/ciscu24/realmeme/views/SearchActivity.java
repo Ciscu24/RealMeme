@@ -108,7 +108,7 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_help_search) {
-            return true;
+            presenter.onClickHelpToolbar();
         }
 
         return super.onOptionsItemSelected(item);
@@ -122,6 +122,13 @@ public class SearchActivity extends AppCompatActivity implements SearchInterface
         i.putExtra("spinner", spinner.getSelectedItemId());
         setResult(RESULT_OK, i);
         finish();
+    }
+
+    @Override
+    public void startHelpSearchActivity() {
+        Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+        intent.putExtra("help", "search");
+        startActivity(intent);
     }
 
     public void datePicker(){

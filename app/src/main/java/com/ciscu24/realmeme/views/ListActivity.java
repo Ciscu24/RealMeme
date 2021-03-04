@@ -291,6 +291,10 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
             presenter.onClickAboutToolbar();
         }
 
+        if(id == R.id.action_help_list){
+            presenter.onClickHelpToolbar();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -344,6 +348,13 @@ public class ListActivity extends AppCompatActivity implements ListInterface.Vie
     public void startSearchActivity() {
         Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
         startActivityForResult(intent, 0);
+    }
+
+    @Override
+    public void startHelpListActivity() {
+        Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+        intent.putExtra("help", "list");
+        startActivity(intent);
     }
 
     @Override

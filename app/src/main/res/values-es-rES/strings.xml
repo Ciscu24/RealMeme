@@ -45,4 +45,6 @@
     <string name="filedsMissing">Rellene todos los campos, por favor</string>
     <string name="memeNotSave">El meme no se ha guardado con éxito</string>
     <string name="deleteMeme">Meme borrado con exito</string>
+    <string name="title_activity_help">Ayuda</string>
+    <string name="internet">Usted no tienen conexión a internet</string>
 </resources>

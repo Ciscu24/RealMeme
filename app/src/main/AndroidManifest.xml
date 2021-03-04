@@ -3,6 +3,8 @@
     package="com.ciscu24.realmeme">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".views.MyApplication"
@@ -13,9 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RealMeme">
         <activity
+            android:name=".views.HelpActivity"
+            android:label="@string/title_activity_help"
+            android:theme="@style/Theme.RealMeme.NoActionBar"></activity>
+        <activity
             android:name=".views.SearchActivity"
             android:label="@string/title_activity_search"
-            android:theme="@style/Theme.RealMeme.NoActionBar"></activity>
+            android:theme="@style/Theme.RealMeme.NoActionBar" />
         <activity
             android:name=".views.AboutActivity"
             android:label="@string/title_activity_about"

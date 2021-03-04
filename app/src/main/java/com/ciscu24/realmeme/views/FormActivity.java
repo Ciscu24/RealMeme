@@ -388,7 +388,7 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_help_form) {
-            return true;
+            presenter.onClickHelpToolbar();
         }
 
         return super.onOptionsItemSelected(item);
@@ -438,6 +438,13 @@ public class FormActivity extends AppCompatActivity implements FormInterface.Vie
         }else{
             Snackbar.make(constraintLayoutFromActivity, getResources().getString(R.string.write_permission_denied), Snackbar.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void startHelpFormActivity() {
+        Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+        intent.putExtra("help", "form");
+        startActivity(intent);
     }
 
     @Override

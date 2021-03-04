@@ -12,6 +12,7 @@
     <string name="title_activity_form">Form</string>
     <string name="title_activity_about">About us</string>
     <string name="title_activity_search">Search</string>
+    <string name="title_activity_help">Help</string>
 
 
     <!-- Strings used in TextInputs -->
@@ -71,6 +72,7 @@
     <string name="filedsMissing">Please fill all fields</string>
     <string name="memeNotSave">Meme has not been saved successfully</string>
     <string name="deleteMeme">Meme deleted successfully</string>
+    <string name="internet">You dont have network connection</string>
 
 
     <!-- Permission -->
@@ -80,5 +82,6 @@
 
     <string name="choose_picture">Choose an image</string>
     <string name="find_object">objects found</string>
+
 
 </resources>

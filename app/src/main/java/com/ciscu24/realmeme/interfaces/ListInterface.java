@@ -14,6 +14,7 @@ public interface ListInterface {
         void startFormActivity(String id);
         void startAboutActivity();
         void startSearchActivity();
+        void startHelpListActivity();
         void onSwipedRemove(RecyclerView.ViewHolder target);
     }
 
@@ -21,6 +22,7 @@ public interface ListInterface {
         void onClickAddMeme();
         void onClickAboutToolbar();
         void onClickSearchToolbar();
+        void onClickHelpToolbar();
         void onClickRecyclerViewItem(String id);
         void onSwipeMeme(RecyclerView.ViewHolder target, String id);
         ArrayList<MemeEntity> getAllItemsSummarize();
