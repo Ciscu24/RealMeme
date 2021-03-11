@@ -15,8 +15,10 @@ Android 5 (API 21) o superiores
  - Lenguaje de programación usado: **[Java](https://www.java.com/es/)**
  - Entorno de desarrollo: **[Android Studio](https://developer.android.com/studio)**
 
-## Uso 🧤
-https://ciscu24.github.io/RealMeme/
+## Ayuda 🧤
+ - Listado: https://ciscu24.github.io/RealMeme/list.html
+ - Formulario: https://ciscu24.github.io/RealMeme/form.html
+ - Buscar: https://ciscu24.github.io/RealMeme/search.html
 
 ## Autor ✒️
 Francisco García Córdoba: [Linkedin](https://www.linkedin.com/in/francisco-garcía-córdoba-246870205/)
